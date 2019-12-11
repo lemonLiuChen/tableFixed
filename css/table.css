@@ -1,0 +1,15 @@
+table{table-layout: fixed;border-collapse: collapse;}
+.table_pithy{border-spacing: 0px; width: 100%; background-color: #fff; color: #000;}
+.table_pithy thead th,.table_pithy tbody td{padding:6px 10px;font-size: 12px; vertical-align: middle; border: 1px solid #d2d8e4;}
+.table_pithy tbody .td_title_bold14{font-weight: bold; font-size: 14px;}
+.table_pithy.table_stripe thead th,.table_pithy.table_stripe tbody td{border: none;}
+.table_pithy.table_stripe tr{border: 1px solid #d2d8e4;}
+.td_bg_ECF{background-color: #ECF0F8;}
+
+.table_fixed_wrap{overflow: auto; position: relative; height: 300px;}
+.tableFixed-hdiv{position: absolute; top: 0px; left: 0px; width: 100%; overflow: hidden; z-index: 1;}
+.tableFixed-bdiv{overflow: auto;position: absolute; top: 30px; left: 0px; width: 100%;}
+.tableFixed-bdiv-lfixed{overflow: hidden; position: absolute; top: 30px; left: 0px; box-shadow: 0 0 10px rgba(0,0,0,.12);}
+.tableFixed-hdiv-lfixed{overflow: hidden; position: absolute; top: 0px; left: 0px; z-index: 2; box-shadow: 0 0 10px rgba(0,0,0,.12);}
+.table_fixed_wrap.is-scroll-left .tableFixed-bdiv-lfixed, .table_fixed_wrap.is-scroll-left .tableFixed-hdiv-lfixed{box-shadow: none;}
+.tableFixed-bdiv-lfixed > table, .tableFixed-hdiv-lfixed > table{width: auto;}
