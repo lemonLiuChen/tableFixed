@@ -156,7 +156,7 @@ TableFixed.prototype.reset = function () {
 	clearTimeout(self.resizeTimer);
 	self.$element            = self.$originElement.clone()
 	self.$parent.html(self.$element);
-	self.headFixed			 = false; // 表头固定
+	self.headFixed			 = self.options.headFixed || false; // 表头固定
 	self.$bodyDiv			 = null; // 主体表格所在div
 	self.$headDiv            = null; // 固定表头dom对象
 	self.$leftDiv            = null; // 左侧固定dom对象
