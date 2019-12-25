@@ -13,3 +13,5 @@ table{table-layout: fixed;border-collapse: collapse;}
 .tableFixed-hdiv-lfixed{overflow: hidden; position: absolute; top: 0px; left: 0px; z-index: 2; box-shadow: 0 0 10px rgba(0,0,0,.12);}
 .table_fixed_wrap.is-scroll-left .tableFixed-bdiv-lfixed, .table_fixed_wrap.is-scroll-left .tableFixed-hdiv-lfixed{box-shadow: none;}
 .tableFixed-bdiv-lfixed > table, .tableFixed-hdiv-lfixed > table{width: auto;}
+.tableFixed-first-row th, .tableFixed-first-row td{height: 0px;padding-top: 0px!important;border-top: none!important;padding-bottom: 0px!important;}
+.tableFixed-place-th{padding: 0px!important; box-sizing: border-box;}

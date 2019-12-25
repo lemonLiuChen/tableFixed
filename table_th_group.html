@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>table</title>
+	<link rel="stylesheet" href="css/table.css">
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="js/vue.js"></script>
+	<script src="js/table2.0.js"></script>
+
+</head>
+<body>
+	<div class="table_fixed_wrap">
+		<table id="example" class="table_pithy">
+			<thead>
+				<tr class="tableFixed-first-row">
+					<th width="150"></th>
+					<th width="90"></th>
+					<th width="90"></th>
+					<th width="90"></th>
+					<th width="90"></th>
+					<th width="90"></th>
+					<th width="90"></th>
+					<th width="90"></th>
+					<th width="90"></th>
+					<th width="90"></th>
+					<th width="90"></th>
+					<th width="90"></th>
+					<th width="90"></th>
+				</tr>
+				<tr class="td_bg_ECF">
+					<th rowspan="2">第一列</th>
+					<th colspan="2">第二列</th>
+					<th colspan="2">第三列</th>
+					<th colspan="2">第四列</th>
+					<th colspan="2">第五列</th>
+					<th colspan="2">第六列</th>
+					<th colspan="2">第七列</th>
+				</tr>
+				<tr class="td_bg_ECF">
+					<th>name</th>
+					<th>value</th>
+					<th>name</th>
+					<th>value</th>
+					<th>name</th>
+					<th>value</th>
+					<th>name</th>
+					<th>value</th>
+					<th>name</th>
+					<th>value</th>
+					<th>name</th>
+					<th>value</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td class="">测试第一列</td>
+					<td class="">张三</td>
+					<td class="">-6.93</td>
+					<td class="">张三</td>
+					<td class="">0.15</td>
+					<td class="">张三</td>
+					<td class="">4.54</td>
+					<td class="">张三</td>
+					<td class="">3.39</td>
+					<td class="">张三</td>
+					<td class="">21.36</td>
+					<td class="">张三</td>
+					<td class="">-6.93</td>
+				</tr>
+				<tr>
+					<td class="">测试第一列</td>
+					<td class="">张三</td>
+					<td class="">12.21</td>
+					<td class="">张三</td>
+					<td class="">7.42</td>
+					<td class="">张三</td>
+					<td class="">9.77</td>
+					<td class="">张三</td>
+					<td class="">3.47</td>
+					<td class="">张三</td>
+					<td class="">31.15</td>
+					<td class="">张三</td>
+					<td class="">12.21</td>
+				</tr>
+				<tr>
+					<td class="">测试第一列</td>
+					<td class="">张三</td>
+					<td class="">-19.14</td>
+					<td class="">张三</td>
+					<td class="">-7.27</td>
+					<td class="">张三</td>
+					<td class="">-5.23</td>
+					<td class="">张三</td>
+					<td class="">-0.08</td>
+					<td class="">张三</td>
+					<td class="">-9.79</td>
+					<td class="">张三</td>
+					<td class="">-19.14</td>
+				</tr>
+				<tr>
+					<td class="">测试第一列</td>
+					<td class="">张三</td>
+					<td class="">-6.93</td>
+					<td class="">张三</td>
+					<td class="">0.15</td>
+					<td class="">张三</td>
+					<td class="">4.54</td>
+					<td class="">张三</td>
+					<td class="">3.39</td>
+					<td class="">张三</td>
+					<td class="">21.36</td>
+					<td class="">张三</td>
+					<td class="">-6.93</td>
+				</tr>
+				<tr>
+					<td class="">测试第一列</td>
+					<td class="">张三</td>
+					<td class="">12.21</td>
+					<td class="">张三</td>
+					<td class="">7.42</td>
+					<td class="">张三</td>
+					<td class="">9.77</td>
+					<td class="">张三</td>
+					<td class="">3.47</td>
+					<td class="">张三</td>
+					<td class="">31.15</td>
+					<td class="">张三</td>
+					<td class="">12.21</td>
+				</tr>
+				<tr>
+					<td class="">测试第一列</td>
+					<td class="">张三</td>
+					<td class="">-19.14</td>
+					<td class="">张三</td>
+					<td class="">-7.27</td>
+					<td class="">张三</td>
+					<td class="">-5.23</td>
+					<td class="">张三</td>
+					<td class="">-0.08</td>
+					<td class="">张三</td>
+					<td class="">-9.79</td>
+					<td class="">张三</td>
+					<td class="">-19.14</td>
+				</tr>
+				<tr>
+					<td class="">测试第一列</td>
+					<td class="">张三</td>
+					<td class="">-6.93</td>
+					<td class="">张三</td>
+					<td class="">0.15</td>
+					<td class="">张三</td>
+					<td class="">4.54</td>
+					<td class="">张三</td>
+					<td class="">3.39</td>
+					<td class="">张三</td>
+					<td class="">21.36</td>
+					<td class="">张三</td>
+					<td class="">-6.93</td>
+				</tr>
+				<tr>
+					<td class="">测试第一列</td>
+					<td class="">张三</td>
+					<td class="">12.21</td>
+					<td class="">张三</td>
+					<td class="">7.42</td>
+					<td class="">张三</td>
+					<td class="">9.77</td>
+					<td class="">张三</td>
+					<td class="">3.47</td>
+					<td class="">张三</td>
+					<td class="">31.15</td>
+					<td class="">张三</td>
+					<td class="">12.21</td>
+				</tr>
+				<tr>
+					<td class="">测试第一列</td>
+					<td class="">张三</td>
+					<td class="">-19.14</td>
+					<td class="">张三</td>
+					<td class="">-7.27</td>
+					<td class="">张三</td>
+					<td class="">-5.23</td>
+					<td class="">张三</td>
+					<td class="">-0.08</td>
+					<td class="">张三</td>
+					<td class="">-9.79</td>
+					<td class="">张三</td>
+					<td class="">-19.14</td>
+				</tr>
+				<tr>
+					<td class="">测试第一列</td>
+					<td class="">张三</td>
+					<td class="">-6.93</td>
+					<td class="">张三</td>
+					<td class="">0.15</td>
+					<td class="">张三</td>
+					<td class="">4.54</td>
+					<td class="">张三</td>
+					<td class="">3.39</td>
+					<td class="">张三</td>
+					<td class="">21.36</td>
+					<td class="">张三</td>
+					<td class="">-6.93</td>
+				</tr>
+				<tr>
+					<td class="">测试第一列</td>
+					<td class="">张三</td>
+					<td class="">12.21</td>
+					<td class="">张三</td>
+					<td class="">7.42</td>
+					<td class="">张三</td>
+					<td class="">9.77</td>
+					<td class="">张三</td>
+					<td class="">3.47</td>
+					<td class="">张三</td>
+					<td class="">31.15</td>
+					<td class="">张三</td>
+					<td class="">12.21</td>
+				</tr>
+				<tr>
+					<td class="">测试第一列</td>
+					<td class="">张三</td>
+					<td class="">-19.14</td>
+					<td class="">张三</td>
+					<td class="">-7.27</td>
+					<td class="">张三</td>
+					<td class="">-5.23</td>
+					<td class="">张三</td>
+					<td class="">-0.08</td>
+					<td class="">张三</td>
+					<td class="">-9.79</td>
+					<td class="">张三</td>
+					<td class="">-19.14</td>
+				</tr>
+				<tr>
+					<td class="">测试第一列</td>
+					<td class="">张三</td>
+					<td class="">-6.93</td>
+					<td class="">张三</td>
+					<td class="">0.15</td>
+					<td class="">张三</td>
+					<td class="">4.54</td>
+					<td class="">张三</td>
+					<td class="">3.39</td>
+					<td class="">张三</td>
+					<td class="">21.36</td>
+					<td class="">张三</td>
+					<td class="">-6.93</td>
+				</tr>
+				<tr>
+					<td class="">测试第一列</td>
+					<td class="">张三</td>
+					<td class="">12.21</td>
+					<td class="">张三</td>
+					<td class="">7.42</td>
+					<td class="">张三</td>
+					<td class="">9.77</td>
+					<td class="">张三</td>
+					<td class="">3.47</td>
+					<td class="">张三</td>
+					<td class="">31.15</td>
+					<td class="">张三</td>
+					<td class="">12.21</td>
+				</tr>
+				<tr>
+					<td class="">测试第一列</td>
+					<td class="">张三</td>
+					<td class="">-19.14</td>
+					<td class="">张三</td>
+					<td class="">-7.27</td>
+					<td class="">张三</td>
+					<td class="">-5.23</td>
+					<td class="">张三</td>
+					<td class="">-0.08</td>
+					<td class="">张三</td>
+					<td class="">-9.79</td>
+					<td class="">张三</td>
+					<td class="">-19.14</td>
+				</tr>
+				<tr>
+					<td class="">测试第一列</td>
+					<td class="">张三</td>
+					<td class="">-6.93</td>
+					<td class="">张三</td>
+					<td class="">0.15</td>
+					<td class="">张三</td>
+					<td class="">4.54</td>
+					<td class="">张三</td>
+					<td class="">3.39</td>
+					<td class="">张三</td>
+					<td class="">21.36</td>
+					<td class="">张三</td>
+					<td class="">-6.93</td>
+				</tr>
+				<tr>
+					<td class="">测试第一列</td>
+					<td class="">张三</td>
+					<td class="">12.21</td>
+					<td class="">张三</td>
+					<td class="">7.42</td>
+					<td class="">张三</td>
+					<td class="">9.77</td>
+					<td class="">张三</td>
+					<td class="">3.47</td>
+					<td class="">张三</td>
+					<td class="">31.15</td>
+					<td class="">张三</td>
+					<td class="">12.21</td>
+				</tr>
+				<tr>
+					<td class="">测试第一列</td>
+					<td class="">张三</td>
+					<td class="">-19.14</td>
+					<td class="">张三</td>
+					<td class="">-7.27</td>
+					<td class="">张三</td>
+					<td class="">-5.23</td>
+					<td class="">张三</td>
+					<td class="">-0.08</td>
+					<td class="">张三</td>
+					<td class="">-9.79</td>
+					<td class="">张三</td>
+					<td class="">-19.14</td>
+				</tr>
+				<tr>
+					<td class="">测试第一列</td>
+					<td class="">张三</td>
+					<td class="">-6.93</td>
+					<td class="">张三</td>
+					<td class="">0.15</td>
+					<td class="">张三</td>
+					<td class="">4.54</td>
+					<td class="">张三</td>
+					<td class="">3.39</td>
+					<td class="">张三</td>
+					<td class="">21.36</td>
+					<td class="">张三</td>
+					<td class="">-6.93</td>
+				</tr>
+				<tr>
+					<td class="">测试第一列</td>
+					<td class="">张三</td>
+					<td class="">12.21</td>
+					<td class="">张三</td>
+					<td class="">7.42</td>
+					<td class="">张三</td>
+					<td class="">9.77</td>
+					<td class="">张三</td>
+					<td class="">3.47</td>
+					<td class="">张三</td>
+					<td class="">31.15</td>
+					<td class="">张三</td>
+					<td class="">12.21</td>
+				</tr>
+				<tr>
+					<td class="">测试第一列</td>
+					<td class="">张三</td>
+					<td class="">-19.14</td>
+					<td class="">张三</td>
+					<td class="">-7.27</td>
+					<td class="">张三</td>
+					<td class="">-5.23</td>
+					<td class="">张三</td>
+					<td class="">-0.08</td>
+					<td class="">张三</td>
+					<td class="">-9.79</td>
+					<td class="">张三</td>
+					<td class="">-19.14</td>
+				</tr>
+				<tr>
+					<td class="">测试第一列</td>
+					<td class="">张三</td>
+					<td class="">-6.93</td>
+					<td class="">张三</td>
+					<td class="">0.15</td>
+					<td class="">张三</td>
+					<td class="">4.54</td>
+					<td class="">张三</td>
+					<td class="">3.39</td>
+					<td class="">张三</td>
+					<td class="">21.36</td>
+					<td class="">张三</td>
+					<td class="">-6.93</td>
+				</tr>
+				<tr>
+					<td class="">测试第一列</td>
+					<td class="">张三</td>
+					<td class="">12.21</td>
+					<td class="">张三</td>
+					<td class="">7.42</td>
+					<td class="">张三</td>
+					<td class="">9.77</td>
+					<td class="">张三</td>
+					<td class="">3.47</td>
+					<td class="">张三</td>
+					<td class="">31.15</td>
+					<td class="">张三</td>
+					<td class="">12.21</td>
+				</tr>
+				<tr>
+					<td class="">测试第一列</td>
+					<td class="">张三</td>
+					<td class="">-19.14</td>
+					<td class="">张三</td>
+					<td class="">-7.27</td>
+					<td class="">张三</td>
+					<td class="">-5.23</td>
+					<td class="">张三</td>
+					<td class="">-0.08</td>
+					<td class="">张三</td>
+					<td class="">-9.79</td>
+					<td class="">张三</td>
+					<td class="">-19.14</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<script>
+		var myTableFixed = null;
+		$(function () {
+			myTableFixed = new TableFixed("#example", {
+				headFixed: true, // 表头固定
+				leftFixedNum: 1, // 左侧固定列数
+			});
+		})
+	</script>
+</body>
+</html>
