@@ -1,5 +1,7 @@
 # tableFixed
 table fixed cols or thead
+## 例子
+[Demo](https://lemonliuchen.github.io/tableFixed/table_th_group.html)
 ## 基本结构
 ```html
 <table>
