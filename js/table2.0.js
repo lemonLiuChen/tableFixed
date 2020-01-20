@@ -86,12 +86,19 @@ TableFixed.prototype.setFixed = function () {
 				rowspan = self.$originElement.children("thead").children("tr").length - 1;
 			}
 			self.$headDiv.find("thead tr").eq(1).append("<th rowspan='" + rowspan + "'></th>");
-			self.$headDiv.find(".tableFixed-first-row").append("<th width='" + (scrollbarWidth) + "'  class='tableFixed-place-th'></th>");
+			self.$headDiv.find(".tableFixed-first-row").append("<th width='" + (scrollbarWidth) + "' class='tableFixed-place-th'></th>");
 		}
 	}
 
 	if (self.leftFixedNum > 0) {
 		// 创建左侧固定
+		var scrollWidth = 1;
+		var tempFirstRowTd = self.$element.find("tr.tableFixed-first-row").find('td, th');
+		for (var i = 0; i < self.leftFixedNum; i++) {
+			if (tempFirstRowTd.length >= i) {
+				scrollWidth += tempFirstRowTd.eq(i)[0].offsetWidth;
+			}
+		}
 		var tempBodyObj = $elementCopy.clone();
 		tempBodyObj.attr("id", "");
 		tempBodyObj.children("thead").remove();
@@ -99,7 +106,7 @@ TableFixed.prototype.setFixed = function () {
 		tempBodyObj.children("tbody").children('tr').find("td:gt(" + (self.leftFixedNum-1) + ")").remove();
 
 		var height = self.$bodyDiv.height();
-		self.$leftDiv = $('<div class="tableFixed-bdiv-lfixed" style="height: ' + height + 'px; top: ' + (headHeight - 1) + 'px;"></div>');
+		self.$leftDiv = $('<div class="tableFixed-bdiv-lfixed" style="width: ' + scrollWidth + 'px; height: ' + height + 'px; top: ' + (headHeight - 1) + 'px;"></div>');
 		self.$leftDiv.append(tempBodyObj);
 		self.$parent.append(self.$leftDiv);
 
@@ -122,21 +129,30 @@ TableFixed.prototype.setFixed = function () {
 					} else {
 						colspan++;
 					}
+					if (colspan >= self.leftFixedNum) {
+						$(tempHeadTr[i]).children("th:gt(" + j + ")").remove();
+						break;
+					}
 				}
-				if (colspan > 1) {
+				/*if (colspan > 1) {
 					$(tempHeadTr[i]).children("th:gt(" + (colspan-1) + ")").remove();
-				}
+				}*/
 			}
 		}
 
 
-		self.$leftHeadDiv = $('<div class="tableFixed-hdiv-lfixed"></div>');
+		self.$leftHeadDiv = $('<div class="tableFixed-hdiv-lfixed" style="width: ' + scrollWidth + 'px;"></div>');
 		self.$leftHeadDiv.append(tempHeadObj);
 		self.$parent.append(self.$leftHeadDiv);
 		self.$headDiv.find('tr:not(.tableFixed-first-row)').each(function (argument) {
 			var trHeight = $(this).height();
 			var index = $(this).index();
 			self.$leftHeadDiv.find('tr').eq(index).height(trHeight);
+		})
+		self.$leftDiv.find('tr:not(.tableFixed-first-row)').each(function (argument) {
+			var index = $(this).index();
+			var trHeight = self.$element.find('tr').eq(index).height();
+			$(this).height(trHeight);
 		})
 
 		self.$parent.addClass("is-scroll-left"); // 初始滚动条在左侧
