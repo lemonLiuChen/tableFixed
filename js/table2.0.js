@@ -7,6 +7,7 @@ var TableFixed = function (element, options) {
 	this.$parent			 = this.$element.parent(); // 最外层dom对象
 	this.$bodyDiv			 = null; // 主体表格所在div
 	this.$headDiv            = null; // 固定表头dom对象
+	this.$headthtd           = 'th'; // 表头是用td写的，还是用th
 	this.$leftDiv            = null; // 左侧固定dom对象
 	this.$leftHeadDiv        = null; // 左侧固定表头dom对象
 	this.headFixed			 = this.options.headFixed || false; // 表头固定
@@ -16,6 +17,8 @@ var TableFixed = function (element, options) {
 	this.th_first_row		 = '', // th第一列，用来设置宽度
 	this.td_first_row		 = '', // td第一列，用来设置宽度
 	this.resizeTimer	     = -1; // resize时的timer
+	this.scrollTimer     = -1; // 滚动检查timer
+	this.callback          = this.options.callback || function () {  }
 
 	this.init();
 	this.setFixed();
@@ -39,10 +42,24 @@ TableFixed.prototype.init = function () {
 	// 重置宽度，有些宽度不足的100%的会自适应，这里重新设置自适应后的宽度
 	self.th_first_row = '<tr class="tableFixed-first-row">';
 	self.td_first_row = '<tr class="tableFixed-first-row">';
-	self.$element.find(".tableFixed-first-row th").each(function () {
+	if (self.$element.find("thead th").length == 0 && self.$element.find("thead td").length > 0) {
+		self.$headthtd = 'td';
+	}
+	if (self.$element.find(".tableFixed-first-row").length == 0) {
+		if (self.$element.find("thead tr").length > 0) {
+			var str = '<tr class="tableFixed-first-row">'
+			self.$element.find("thead tr:first " + self.$headthtd).each(function () {
+				var width = $(this).width();
+				str  += '<' + self.$headthtd + ' width="' + width + '" style="width: ' + width + 'px;" /></' + self.$headthtd + '>';
+			})
+			self.$element.find("thead").prepend(str);
+		}
+	}
+
+	self.$element.find(".tableFixed-first-row " + self.$headthtd).each(function () {
 		var width = $(this).width();
-		self.th_first_row  += '<th width="' + width + '" /></th>';
-		self.td_first_row  += '<td width="' + width + '" /></td>';
+		self.th_first_row  += '<' + self.$headthtd + ' width="' + width + '" style="width: ' + width + 'px;" /></' + self.$headthtd + '>';
+		self.td_first_row  += '<td width="' + width + '" style="width: ' + width + 'px;" /></td>';
 	})
 	self.th_first_row += '</tr>';
 	self.td_first_row += '</tr>';
@@ -85,58 +102,60 @@ TableFixed.prototype.setFixed = function () {
 			if (self.$originElement.children("thead").children("tr").length > 2) {
 				rowspan = self.$originElement.children("thead").children("tr").length - 1;
 			}
-			self.$headDiv.find("thead tr").eq(1).append("<th rowspan='" + rowspan + "'></th>");
-			self.$headDiv.find(".tableFixed-first-row").append("<th width='" + (scrollbarWidth) + "' class='tableFixed-place-th'></th>");
+			self.$headDiv.find("thead tr").eq(1).append("<" + self.$headthtd + " rowspan='" + rowspan + "'></" + self.$headthtd + ">");
+			self.$headDiv.find(".tableFixed-first-row").append("<" + self.$headthtd + " width='" + (scrollbarWidth) + "' style='width: " + (scrollbarWidth) + "px;' class='tableFixed-place-th'></" + self.$headthtd + ">");
 		}
 	}
 
 	if (self.leftFixedNum > 0) {
 		// 创建左侧固定
-		var scrollWidth = 1;
+		var scrollWidth = 0;
 		var tempFirstRowTd = self.$element.find("tr.tableFixed-first-row").find('td, th');
 		for (var i = 0; i < self.leftFixedNum; i++) {
 			if (tempFirstRowTd.length >= i) {
-				scrollWidth += tempFirstRowTd.eq(i)[0].offsetWidth;
+				scrollWidth += tempFirstRowTd.eq(i).outerWidth();
 			}
 		}
 		var tempBodyObj = $elementCopy.clone();
 		tempBodyObj.attr("id", "");
 		tempBodyObj.children("thead").remove();
 		tempBodyObj.children("tbody").prepend(self.td_first_row);
-		tempBodyObj.children("tbody").children('tr').find("td:gt(" + (self.leftFixedNum-1) + ")").remove();
 
 		var height = self.$bodyDiv.height();
+		if (!navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i) && self.$bodyDiv[0].scrollHeight > self.$bodyDiv[0].offsetHeight) {
+			height -= 10;
+		}
 		self.$leftDiv = $('<div class="tableFixed-bdiv-lfixed" style="width: ' + scrollWidth + 'px; height: ' + height + 'px; top: ' + (headHeight - 1) + 'px;"></div>');
 		self.$leftDiv.append(tempBodyObj);
 		self.$parent.append(self.$leftDiv);
+		tempBodyObj.children("tbody").children('tr').each(function () {
+			$(this).height($(this).outerHeight(true));
+		})
+		tempBodyObj.children("tbody").children('tr').find("td:gt(" + (self.leftFixedNum-1) + ")").remove();
 
 		var tempHeadObj = $elementCopy.clone();
 		tempHeadObj.attr("id", "");
 		tempHeadObj.children("tbody").remove();
 		var tempHeadTr = tempHeadObj.children("thead").children('tr');
-		tempHeadTr.find("th:gt(" + (self.leftFixedNum-1) + ")").remove();
+		tempHeadTr.find(self.$headthtd + ":gt(" + (self.leftFixedNum-1) + ")").remove();
 		for (var i = 1; i < tempHeadTr.length-1; i++) {
-			if ($(tempHeadTr[i]).children("th").length > 0) {
+			if ($(tempHeadTr[i]).children(self.$headthtd).length > 0) {
 				var colspan = 0;
-				for (var j = 0; j < $(tempHeadTr[i]).children("th").length; j++) {
-					var tempObj = $(tempHeadTr[i]).children("th")[j];
+				for (var j = 0; j < $(tempHeadTr[i]).children(self.$headthtd).length; j++) {
+					var tempObj = $(tempHeadTr[i]).children(self.$headthtd)[j];
 					if (typeof $(tempObj).attr("rowspan") != 'undefined' && $(tempObj).attr("rowspan") > 1) {
 						var rowspan = parseInt($(tempObj).attr("rowspan"));
-						$(tempHeadTr[i]).nextAll().filter(":lt(" + rowspan + ")").children("th:last-child").remove();
+						$(tempHeadTr[i]).nextAll().filter(":lt(" + rowspan + ")").children(self.$headthtd + ":last-child").remove();
 					}
 					if (typeof $(tempObj).attr("colspan") != 'undefined') {
 						colspan += parseInt($(tempObj).attr("colspan"));
 					} else {
 						colspan++;
 					}
-					if (colspan >= self.leftFixedNum) {
-						$(tempHeadTr[i]).children("th:gt(" + j + ")").remove();
-						break;
-					}
 				}
-				/*if (colspan > 1) {
-					$(tempHeadTr[i]).children("th:gt(" + (colspan-1) + ")").remove();
-				}*/
+				if (colspan > 1) {
+					$(tempHeadTr[i]).children(self.$headthtd + ":gt(" + (colspan-1) + ")").remove();
+				}
 			}
 		}
 
@@ -148,11 +167,6 @@ TableFixed.prototype.setFixed = function () {
 			var trHeight = $(this).height();
 			var index = $(this).index();
 			self.$leftHeadDiv.find('tr').eq(index).height(trHeight);
-		})
-		self.$leftDiv.find('tr:not(.tableFixed-first-row)').each(function (argument) {
-			var index = $(this).index();
-			var trHeight = self.$element.find('tr').eq(index).height();
-			$(this).height(trHeight);
 		})
 
 		self.$parent.addClass("is-scroll-left"); // 初始滚动条在左侧
@@ -170,6 +184,10 @@ TableFixed.prototype.setFixed = function () {
 			}, 100);
 		})
 	}
+
+	self.callback({
+		$parent: self.$parent
+	});
 }
 
 /**
@@ -207,6 +225,27 @@ TableFixed.prototype.scrollTable = function () {
 			if (self.leftFixedNum > 0 && self.$leftDiv) {
 				var scrollTop = $(this).scrollTop();
 				self.$leftDiv.scrollTop(scrollTop);
+			}
+
+			// ios滚动时有弹性，会导致滚动有负值，这里检查一下
+			if (navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i)) {
+				clearTimeout(self.scrollTimer);
+				self.scrollTimer = setTimeout(function() {
+					if (self.$element.parent().scrollLeft() < 0) {
+						self.$element.parent().scrollLeft(0)
+					}
+					if (self.$element.parent().scrollTop() < 0) {
+						self.$element.parent().scrollTop(0)
+					}
+					if (self.$headDiv.scrollLeft() < 0) {
+						self.$headDiv.scrollLeft(0)
+					}
+					if (self.leftFixedNum > 0 && self.$leftDiv) {
+						if (self.$leftDiv.scrollTop() < 0) {
+							self.$leftDiv.scrollTop(0)
+						}
+					}
+				}, 200);
 			}
 		})
 	}
